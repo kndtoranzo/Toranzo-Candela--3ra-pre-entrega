@@ -7,4 +7,4 @@ def inicio(request):
 def crear_uñas(request,modelo, largo, color ):
     unias = manicura(modelo=modelo, largo=largo, color=color)
     unias.save()
-    return render(request, "uñas_templates/creacion.html", {"uñas": unias})
+    return render(request, "uñas_templates/creacion.html", {"unias": unias})
