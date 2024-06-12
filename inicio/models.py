@@ -6,5 +6,6 @@ class manicura (models.Model):
     largo = models.CharField( max_length=20)
     color = models.CharField( max_length=20)
 
-    
+    def _str_(self):
+        return f"{self.modelo} - {self.largo} - {self.color}"
     
