@@ -1,0 +1,2 @@
+cree una pág. donde se pueden crear diseños de uñas, tenes que poner el tipo de uña, ej. redonda, el largo que quees que tenga, ej. corta, y el color de la uña.
+solo tiene una modelo y formulario, tiene un template dentro de la app y otro afuera.
