@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block title_head %}
-     De un sueño nails
+     Creación de uñas
 {% endblock title_head %}
 
 
@@ -12,5 +12,10 @@
 
 
 {% block main  %}
-     Se creó un nuevo modelo de uña: {{unias.modelo}}, {{unias.largo}} y {{unias.color}}, muy buena elección linda.   
+<form action={% url "crear_uñas" %} method="POST">
+     {% csrf_token %}
+     {{formulario}}
+      <input type="submit" value="Enviar"> 
+
+</form>
 {% endblock main%}
