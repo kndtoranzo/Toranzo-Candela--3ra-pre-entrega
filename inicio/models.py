@@ -6,6 +6,6 @@ class manicura (models.Model):
     largo = models.CharField( max_length=20)
     color = models.CharField( max_length=20)
 
-    def _str_(self):
-        return f"{self.modelo} - {self.largo} - {self.color}"
+    def __str__(self):
+        return f"el tipo de uña es {self.modelo}, {self.largo} y {self.color}"
     
