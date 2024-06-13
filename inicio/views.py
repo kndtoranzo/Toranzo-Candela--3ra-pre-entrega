@@ -11,15 +11,17 @@ def crear_uñas(request):
     print("get:", request.GET)
     print("post:", request.POST)
     
-    formulario= crear_unias() 
-    
+    formulario= crear_unias()
     if request.method == "POST":
         formulario= crear_unias(request.POST)
         if formulario.is_valid():
             datos= formulario.cleaned_data
-            unias= manicura(modelo=datos.get("estilo"), largo=datos.get("largo"), color=datos.get("color"))
+            unias= manicura(modelo=datos.get("modelo"), largo=datos.get("largo"), color=datos.get("color"))
             unias.save()
-            return redirect("inicio")
-            
-           
+            return redirect("unias")
+                   
     return render(request, "uñas_templates/creacion.html", {"formulario": formulario})
+
+def unias(request):
+    unias= manicura.objects.all()
+    return render(request, "inicio/unias.html", {"uñas": unias})

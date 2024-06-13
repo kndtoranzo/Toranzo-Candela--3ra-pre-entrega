@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Uñas
+{% endblock title_head %}
+
+
+
+{% block h1_header%}
+    Listado de uñas
+{% endblock h1_header%}
+
+
+{% block main  %}
+<ul>
+    {% for unia in unias %}
+    <li>{{unia}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock main%}
