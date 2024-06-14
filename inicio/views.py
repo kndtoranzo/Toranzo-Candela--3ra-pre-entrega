@@ -24,4 +24,4 @@ def crear_uñas(request):
 
 def unias(request):
     unias= manicura.objects.all()
-    return render(request, "inicio/unias.html", {"uñas": unias})
+    return render(request, "inicio/unias.html", {"unias": unias})
