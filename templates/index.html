@@ -30,6 +30,18 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <form action={% url "logout" %} method="post">
+                                {% csrf_token %}
+                                <input type="submit" class="nav-link" value="Cerrar Sesión">
+                            </form>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#!">{{request.user.username}}</a></li>                        
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href={% url "login" %}>Iniciar Sesión</a></li>                        
+                        <li class="nav-item"><a class="nav-link" href={% url "registro" %}>Registrarse</a></li>                        
+                        {% endif %}
                 </div>
             </div>
         </nav>
