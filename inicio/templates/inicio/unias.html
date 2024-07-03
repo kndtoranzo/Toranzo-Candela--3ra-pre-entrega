@@ -12,6 +12,12 @@
 
 
 {% block main  %}
+
+<form action={% url "unias" %} method="get">
+    {{formulario}}
+    <input type="submit" value="Buscar">
+</form>
+
 <ul>
     {% for unia in unias %}
     <li>{{unia}}</li>
