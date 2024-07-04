@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Auto
+{% endblock title_head %}
+
+
+{% block h1_header %}
+    {{unia}}
+{% endblock h1_header %}
+
+{% block main %}
+<ul>
+    <li>modelo: {{unia.modelo}}</li>
+    <li>largo: {{unia.largo}}</li>
+    <li>color: {{unia.color}}</li>
+</ul>
+{% endblock main %}
+

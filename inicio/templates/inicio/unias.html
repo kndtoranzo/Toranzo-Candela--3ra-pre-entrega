@@ -13,15 +13,24 @@
 
 {% block main  %}
 
+<a href={% url "crear_uñas" %}>Crear Uña!</a>
+
 <form action={% url "unias" %} method="get">
     {{formulario}}
     <input type="submit" value="Buscar">
 </form>
-
-<ul>
-    {% for unia in unias %}
-    <li>{{unia}}</li>
-    {% endfor %}
-</ul>
+    {% if unias %}
+        <ul>
+            {% for unia in unias %}
+            <li>{{unia}} |
+                <a href={% url "eliminar_unia" unia.id %}>Eliminar</a> | 
+                <a href={% url "editar_unia" unia.id %}>Editar</a> |
+                <a href={% url "ver_unia" unia.id %}>Ver</a> |
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>No hay uñas creadas!</p>    
+    {% endif %}
 
 {% endblock main%}
