@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from .models import Turnos
 from django.urls import reverse_lazy
@@ -26,4 +26,9 @@ class EditarTurno(UpdateView):
 
 class VerTurno(DetailView):
     model = Turnos
-    template_name = "turnos/ver_turno.html"    
+    template_name = "turnos/ver_turno.html" 
+
+class EliminarTurno(DeleteView):
+    model = Turnos
+    template_name = "turnos/eliminar_turno.html"
+    success_url = reverse_lazy("agenda")   

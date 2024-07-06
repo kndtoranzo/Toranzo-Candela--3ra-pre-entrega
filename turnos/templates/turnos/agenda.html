@@ -20,9 +20,9 @@
             {% for turno in turnos %}
             <li>
                 {{turno}} 
-                {% comment %} <a href={% url "eliminar_turno" turno.id %}>Eliminar</a> |{% endcomment %} 
+                <a href={% url "eliminar_turno" turno.id %}>Eliminar</a> | 
                 <a href={% url "editar_turno" turno.pk %}>Editar</a> |
-                <a href={% url "ver_turno" turno.id %}>Ver</a> 
+                <a href={% url "ver_turno" turno.pk %}>Ver</a> |
             </li>
             {% endfor %}
         </ul>

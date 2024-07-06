@@ -12,10 +12,10 @@
 
 
 {% block main  %}
-<form action={% url "editar_turno" turno.pk %} method="POST">
+<form action={% url "editar_turno" object.pk %} method="POST">
      {% csrf_token %}
      {{form}}
-      <input type="submit" value="Actualizar Cambios"> 
+      <input type="submit" value="Actualizar"> 
 
 </form>
 {% endblock main%}

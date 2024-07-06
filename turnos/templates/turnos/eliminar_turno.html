@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Eliminar
+{% endblock title_head %}
+
+
+
+{% block h1_header%}
+    Eliminar Turno
+{% endblock h1_header%}
+
+
+{% block main  %}
+<form action={% url "eliminar_turno" object.pk %} method="POST">
+     {% csrf_token %}
+     <p>
+        Esta seguro de eliminar su turno {{object}}?
+     </p>
+      <input type="submit" value="Eliminar"> 
+
+</form>
+{% endblock main%}
