@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Editar
+{% endblock title_head %}
+
+
+
+{% block h1_header%}
+    Editar Turno
+{% endblock h1_header%}
+
+
+{% block main  %}
+<form action={% url "editar_turno" turno.pk %} method="POST">
+     {% csrf_token %}
+     {{form}}
+      <input type="submit" value="Actualizar Cambios"> 
+
+</form>
+{% endblock main%}

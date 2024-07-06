@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Turno
+{% endblock title_head %}
+
+
+{% block h1_header %}
+    {{turno}}
+{% endblock h1_header %}
+
+{% block main %}
+<ul>
+    <li>Fecha: {{turno.fecha}}</li>
+    <li>Tipo_Manicura: {{turno.tipo_manicura}}</li>
+    <li>Descripcion: {{turno.descripcion}}</li>
+</ul>
+{% endblock main %}

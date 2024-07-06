@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Agenda
+{% endblock title_head %}
+
+
+
+{% block h1_header%}
+    Generar Turno
+{% endblock h1_header%}
+
+
+{% block main  %}
+<form action={% url "crear_turno" %} method="POST">
+     {% csrf_token %}
+     {{form}}
+      <input type="submit" value="Crear"> 
+
+</form>
+{% endblock main%}
