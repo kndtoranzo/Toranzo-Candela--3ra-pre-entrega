@@ -34,13 +34,13 @@
                         <li class="nav-item mx-0 mx-lg-1">
                             <form action={% url "logout" %} method="post">
                                 {% csrf_token %}
-                                <input type="submit" class="nav-link" value="Cerrar Sesión">
+                                <input type="submit" class="bnt bnt-secondary" value="Cerrar Sesión">
                             </form>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#!">{{request.user.username}}</a></li>                        
+                        <li class="nav-item"><a class="nav-link" href={% url "perfil" %}>{{request.user.username}}</a></li>                        
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" href={% url "login" %}>Iniciar Sesión</a></li>                        
-                        <li class="nav-item"><a class="nav-link" href={% url "registro" %}>Registrarse</a></li>                        
+                        <li class="nav-item"><a class="bnt bnt-primary" href={% url "login" %}>Iniciar Sesión</a></li>                        
+                        <li class="nav-item"><a class="bnt bnt-danger" href={% url "registro" %}>Registrarse</a></li>                        
                         {% endif %}
                 </div>
             </div>

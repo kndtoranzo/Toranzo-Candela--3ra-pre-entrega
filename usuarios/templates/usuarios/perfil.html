@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block title_head %}
+    Perfil
+{% endblock title_head %}
+
+{% block h1_header %}
+    Perfil
+{% endblock h1_header %}
+
+{% block main %}
+<div class="perfil">
+    <h2>Información del Usuario</h2>
+    <ul>
+        <li><strong>Nombre:</strong> {{ perfil.username }}</li>
+        <li><strong>Email:</strong> {{ perfil.email }}</li>
+    </ul>
+</div>
+
+<div class="acciones">
+    <h2>Acciones</h2>
+    <a href="{% url 'editar_perfil' perfil.id %}">Editar Perfil</a>
+    <a href="{% url 'cambiar_contrasenia' perfil.id %}">Cambiar Contraseña</a>
+</div>
+{% endblock %}

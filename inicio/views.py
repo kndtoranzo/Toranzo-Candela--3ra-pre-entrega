@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from inicio.models import manicura
 from inicio.forms import crear_unias, buscar_unia, EditarUnia
 
+from django.contrib.auth.decorators import login_required
+
 
 def inicio(request):
     return render(request, "inicio/inicio.html")
@@ -30,12 +32,13 @@ def unias(request):
         unias=manicura.objects.all()
     return render(request, "inicio/unias.html", {"unias": unias, "formulario": formulario})
 
+@login_required
 def eliminar_unia(request, id):
     unia = manicura.objects.get(id=id)
     unia.delete()
     return redirect("unias")
 
-
+@login_required
 def editar_unia(request, id):
     unia = manicura.objects.get(id=id)
     formulario = EditarUnia(initial={"modelo": unia.modelo, "largo": unia.largo, "color": unia.color})

@@ -11,3 +11,12 @@ class Registro(UserCreationForm):
         model = User
         fields =["username", "email", "password1", "password2"]
         help_texts = {key: "" for key in fields}
+
+class EditarPerfilF(UserCreationForm):
+    
+    class Meta:
+        model = User
+        fields =["username", "email"]
+
+class CambiarContrasenia(forms.Form):
+    new_password = forms.CharField(label="Nueva contraseña", widget=forms.PasswordInput)
