@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as login_django
-from usuarios.forms import Registro, EditarPerfilF, CambiarContrasenia
-from usuarios.models import Registro
+from usuarios.forms import RegistroForm, EditarPerfilF, CambiarContrasenia
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 
 def login(request):
@@ -22,29 +24,32 @@ def login(request):
     return render(request, "usuarios/iniciar_sesion.html", {"formulario": formulario})
 
 def registro(request):
-    formulario = Registro()
+    formulario = RegistroForm()
     if request.method == "POST":
-        formulario = Registro(request.POST)
+        formulario = RegistroForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return redirect("login")
     return render(request, "usuarios/registro.html", {"formulario": formulario})
+
 @login_required
 def perfil(request):
     perfil = request.user
     return render(request, "usuarios/perfil.html", {"perfil": perfil})
-
-def EditarPerfil(request, id):
-    perfil = get_object_or_404(Registro, id=id)
-    formulario = EditarPerfilF(initial={"username": perfil.username, "email": perfil.email})
-    
+@login_required
+def EditarPerfil(request):
+    formulario = EditarPerfilF(instance= request.user)
     if request.method == "POST":
-        formulario = EditarPerfilF(request.POST, instance=perfil)
+        formulario = EditarPerfilF(request.POST, instance= request.user)
         if formulario.is_valid():
+            datosextra = request.user.datosextra
+            datosextra.avatar =formulario.cleaned_data.get("avatar")
+            datosextra.save()
+            
             formulario.save()
-            return redirect("perfil_default")
-    
-    return render(request, "usuarios/editar_perfil.html", {"formulario": formulario, "perfil": perfil})
-    
-def CambiarContrasenia(request):
-    ...    
+            return redirect(EditarPerfil)
+    return render(request, "usuarios/editar_perfil.html", {"formulario": formulario})
+   
+class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
+    template_name = "usuarios/cambiar_contrasenia.html"
+    success_url = reverse_lazy("perfil")

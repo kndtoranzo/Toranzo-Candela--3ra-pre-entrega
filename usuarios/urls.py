@@ -7,6 +7,6 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("registro/", views.registro, name="registro"),
     path('perfil/', views.perfil, name='perfil'),
-    path('editar_perfil/<int:id>/', views.EditarPerfil, name='editar_perfil'),
-    path('cambiar_contrasenia/<int:id>/', views.CambiarContrasenia, name='cambiar_contrasenia'),
+    path('editar_perfil/', views.EditarPerfil, name='editar_perfil'),
+    path('cambiar_contrasenia/', views.CambiarContrasenia.as_view(), name='cambiar_contrasenia'),
 ]
