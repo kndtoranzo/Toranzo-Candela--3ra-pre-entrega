@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login as login_django
+from django.contrib.auth import authenticate, login as django_login
 from usuarios.forms import RegistroForm, EditarPerfilF, CambiarContrasenia
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from usuarios.models import DatosExtra
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def login(request):
@@ -18,7 +20,9 @@ def login(request):
             contrasenia = formulario.cleaned_data.get("password")
             
             user = authenticate(request, username=usuario, password=contrasenia)
-            login_django(request, user)
+            django_login(request, user)
+            
+            DatosExtra.objects.get_or_create(user=user)
             
             return redirect("inicio")
     return render(request, "usuarios/iniciar_sesion.html", {"formulario": formulario})
@@ -38,11 +42,15 @@ def perfil(request):
     return render(request, "usuarios/perfil.html", {"perfil": perfil})
 @login_required
 def EditarPerfil(request):
-    formulario = EditarPerfilF(instance= request.user)
+    
+    formulario = EditarPerfilF(initial={"avatar":request.user.datosextra.avatar}, instance= request.user)
+    
     if request.method == "POST":
-        formulario = EditarPerfilF(request.POST, instance= request.user)
+        formulario = EditarPerfilF(request.POST, request.FILES, instance= request.user)
         if formulario.is_valid():
+            
             datosextra = request.user.datosextra
+
             datosextra.avatar =formulario.cleaned_data.get("avatar")
             datosextra.save()
             
